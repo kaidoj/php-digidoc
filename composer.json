@@ -1,7 +1,7 @@
 {
-    "name"        : "mihkelallorg/php-digidoc",
+    "name"        : "kgilden/php-digidoc",
     "description" : "A library for signing & verifying documents using estonian id card",
-    "homepage"    : "https://github.com/mihkelallorg/php-digidoc",
+    "homepage"    : "https://github.com/kgilden/php-digidoc",
     "license"     : "MIT",
     "type"        : "library",
     "keywords"    : ["digidoc", "id-card"],
