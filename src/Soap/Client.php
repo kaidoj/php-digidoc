@@ -19,7 +19,7 @@ use KG\DigiDoc\Exception\ApiException;
 class Client extends \SoapClient
 {
     const WSDL_PROD = 'https://digidocservice.sk.ee/';
-    const WSDL_TEST = 'https://www.openxades.org:9443/?wsdl';
+    const WSDL_TEST = 'https://tsp.demo.sk.ee/';
 
     private static $classmap = array(
         'DataFileAttribute' => '\KG\DigiDoc\Soap\Wsdl\DataFileAttribute',
@@ -47,7 +47,7 @@ class Client extends \SoapClient
      * @param array  $options
      * @param string $wsdl
      */
-    public function __construct(array $options = array(), $wsdl = 'https://www.openxades.org:9443/?wsdl')
+    public function __construct(array $options = array(), $wsdl = 'https://tsp.demo.sk.ee/')
     {
         if (!isset($options['classmap'])) {
             $options['classmap'] = array();

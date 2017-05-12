@@ -50,7 +50,7 @@ class DigiDocService extends \SoapClient
      * @param string $wsdl The wsdl file to use
      * @access public
      */
-    public function __construct(array $options = array(), $wsdl = 'https://www.openxades.org:9443/?wsdl')
+    public function __construct(array $options = array(), $wsdl = 'https://tsp.demo.sk.ee/')
     {
         foreach (self::$classmap as $key => $value) {
             if (!isset($options['classmap'][$key])) {
