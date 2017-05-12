@@ -14,7 +14,7 @@
     "require": {
         "php": ">=5.3.8",
         "ext-soap": "*",
-        "symfony/http-foundation": "~2.0",
+        "symfony/http-foundation": "~3.0",
         "ext-zip": "*",
         "doctrine/collections": "~1.0",
         "symfony/process": "~2.0",

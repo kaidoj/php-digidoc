@@ -285,11 +285,4 @@ class Api implements ApiInterface
         }
     }
 
-    /**
-     * @param \SoapClient $client
-     */
-    public function setClient(\SoapClient $client)
-    {
-        $this->client = $client;
-    }
 }
