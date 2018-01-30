@@ -44,7 +44,7 @@ $signature->setSolution('F6..00');
 $api->update($envelope);
 
 // Time to write it on the disc.
-$api->write('/tmp/my-newly-created-envelope.bdoc');
+$api->write($envelope, '/tmp/my-newly-created-envelope.bdoc');
 
 // Make sure to "close" the envelope (basically closes the session in the
 // remote DigiDoc service).
