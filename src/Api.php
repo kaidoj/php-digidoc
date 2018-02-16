@@ -302,14 +302,14 @@ class Api implements ApiInterface
     */
     public function mobileSign(
         Session $session,
-        string $SignerIDCode, 
-        string $SignerPhoneNo, 
-        string $ServiceName = 'Testimine',
-        string $Language = 'EST',
-        string $MessagingMode = 'asynchClientServer',
-        int $AsyncConfiguration = null,
-        bool $ReturnDocInfo = false,
-        bool $ReturnDocData = false
+        $SignerIDCode, 
+        $SignerPhoneNo, 
+        $ServiceName = "Testimine",
+        $Language = "EST",
+        $MessagingMode = "asynchClientServer",
+        $AsyncConfiguration = null,
+        $ReturnDocInfo = false,
+        $ReturnDocData = false
     ) {
         
         $result = $this->call('MobileSign', [
@@ -344,7 +344,7 @@ class Api implements ApiInterface
      * 
      * @return string Status
      */
-    public function getStatusInfo(Session $session, bool $ReturnDocInfo = false, bool $WaitSignature = true) 
+    public function getStatusInfo(Session $session,$ReturnDocInfo = false, $WaitSignature = true) 
     {
         $result = $this->call('GetStatusInfo', [$session->getId(), $ReturnDocInfo, $WaitSignature]);
 
@@ -356,7 +356,7 @@ class Api implements ApiInterface
      * 
      * @param string $phoneNo
      * 
-     * @return strign
+     * @return string
      */
     public function fixPhoneNo(string $phoneNo)
     {
