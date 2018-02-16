@@ -75,11 +75,11 @@ $envelope->addFile('/second/path/to/file.md');
 //Signer id code and phone are required
 $api->mobileSign($envelope->getSession(), $SignerIDCode, $SignerPhoneNo);
 
+// Sync up with the server
+$api->update($envelope);
+
 //check for signing
 $api->getStatusInfo($envelope->getSession());
-
-// Sync up with the server once more to send the solution.
-$api->update($envelope);
 
 // Time to write it on the disc.
 $api->write($envelope, '/tmp/my-newly-created-envelope.bdoc');
