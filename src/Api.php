@@ -285,4 +285,88 @@ class Api implements ApiInterface
         }
     }
 
+   /**
+    * Mobile sign 
+    *
+    * @param Session $session
+    * @param string $SignerIDCode
+    * @param string $SignerPhoneNo
+    * @param string $ServiceName default Testimine
+    * @param string $Language
+    * @param string $MessagingMode
+    * @param int $AsyncConfiguration
+    * @param bool $ReturnDocInfo
+    * @param bool $ReturnDocData
+    *
+    * @return string ChallengeID
+    */
+    public function mobileSign(
+        Session $session,
+        $SignerIDCode, 
+        $SignerPhoneNo, 
+        $ServiceName = "Testimine",
+        $Language = "EST",
+        $MessagingMode = "asynchClientServer",
+        $AsyncConfiguration = null,
+        $ReturnDocInfo = false,
+        $ReturnDocData = false
+    ) {
+        
+        $result = $this->call('MobileSign', [
+            $session->getId(),
+            $SignerIDCode,
+            null,
+            $this->fixPhoneNo($SignerPhoneNo),
+            $ServiceName,
+            null,
+            $Language,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            $MessagingMode,
+            $AsyncConfiguration,
+            $ReturnDocInfo,
+            $ReturnDocData
+        ]);
+
+        return $result['ChallengeID'];
+    }
+        
+    /** 
+     * Get MobileSign status information
+     * 
+     * @param Session $session
+     * @param bool $ReturnDocInfo
+     * @param bool $WaitSignature
+     * 
+     * @return string Status
+     */
+    public function getStatusInfo(Session $session,$ReturnDocInfo = false, $WaitSignature = true) 
+    {
+        $result = $this->call('GetStatusInfo', [$session->getId(), $ReturnDocInfo, $WaitSignature]);
+
+        return $result['Status'];
+    }
+
+     /**
+     * Fix client phone nr
+     * 
+     * @param string $phoneNo
+     * 
+     * @return string
+     */
+    public function fixPhoneNo(string $phoneNo)
+    {
+        $phoneNo = str_replace(" ","",$phoneNo);
+        $phoneNo = trim($phoneNo,"+");
+        
+        if (substr($phoneNo,0,3)!="372") {
+            $phoneNo="372".preg_replace("/[^0-9,.]/", "", $phoneNo);
+        }
+        
+        return $phoneNo;
+    }
 }

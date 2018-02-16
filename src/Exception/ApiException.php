@@ -23,6 +23,7 @@ class ApiException extends DigiDocException
         101 => 'Some of the arguments are invalid.',
         102 => 'A mandatory argument is missing.',
         103 => 'Access denied to OCSP - see https://www.sk.ee/en/services/validity-confirmation-services/auth-ocsp/ for more.',
+        104 => 'Client is not authorized to access service',
         200 => 'Unspecified fault caused by server.',
         201 => 'User certificate not found.',
         202 => 'Not possible to check user certificate.',
@@ -60,7 +61,7 @@ class ApiException extends DigiDocException
      * @return ApiException
      */
     public static function createFromSoapFault(\SoapFault $e)
-    {
+    {   
         $code = (int) $e->getMessage();
 
         $message = 'Request failed';
