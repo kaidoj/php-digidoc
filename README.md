@@ -72,6 +72,9 @@ $envelope = $api->create();
 $envelope->addFile('/path/to/file.txt');
 $envelope->addFile('/second/path/to/file.md');
 
+// Sync up with the server
+$api->update($envelope);
+
 //Signer id code and phone are required
 $api->mobileSign($envelope->getSession(), $SignerIDCode, $SignerPhoneNo);
 
