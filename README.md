@@ -76,7 +76,9 @@ $envelope->addFile('/second/path/to/file.md');
 $api->update($envelope);
 
 //Signer id code and phone are required
-$api->mobileSign($envelope->getSession(), $SignerIDCode, $SignerPhoneNo);
+$challenge = $api->mobileSign($envelope->getSession(), $SignerIDCode, $SignerPhoneNo);
+
+printf("Challenge: %s\n", $challenge);
 
 // Sync up with the server
 $api->update($envelope);
