@@ -49,7 +49,7 @@ class File
     /**
      * @var string
      */
-    private $diggestValue = '';
+    private $digestValue = '';
 
     /**
      * @param string|null $pathname
