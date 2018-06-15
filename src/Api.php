@@ -39,23 +39,38 @@ class Api implements ApiInterface
     private $tracker;
 
     /**
+     * @var Mode
+     */
+    private $mode;
+
+    /**
      * @param \SoapClient  $client
      * @param Encoder|null $encoder
      * @param Tracker|null $tracker
      */
-    public function __construct(\SoapClient $client, Encoder $encoder = null, Tracker $tracker = null)
+    public function __construct(\SoapClient $client, Encoder $encoder = null, Tracker $tracker = null, $mode = 'HASHCODE')
     {
         $this->client = $client;
         $this->encoder = $encoder ?: new Encoder();
         $this->tracker = $tracker ?: new Tracker();
+        $this->mode = $mode==self::CONTENT_TYPE_HASHCODE?self::CONTENT_TYPE_HASHCODE:self::CONTENT_TYPE_EMBEDDED;
+    }
+
+    public function createEmpty()
+    {
+        $envelope = new Envelope(new Session(uniqid()));
+
+        $this->tracker->add($envelope);
+
+        return $envelope;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function create()
+    public function create($dataFiles = null)
     {
-        $result = $this->call('startSession', array('', '', true, ''));
+        $result = $this->call('startSession', array('', '', true, $dataFiles));
         $result = $this->call('createSignedDoc', array($sessionId = $result['Sesscode'], self::DOC_FORMAT, self::DOC_VERSION));
 
         $envelope = new Envelope(new Session($sessionId));
@@ -182,11 +197,12 @@ class Api implements ApiInterface
                 $session->getId(),
                 $file->getName(),
                 $file->getMimeType(),
-                self::CONTENT_TYPE_EMBEDDED,
+                $this->mode,
                 $file->getSize(),
-                '',
-                '',
-                $this->encoder->encode($file->getContent()),
+                $file->getDigestType(),
+                $file->getDigestValue(),
+                //$this->encoder->encode($file->getContent())
+                $this->mode==self::CONTENT_TYPE_EMBEDDED?$this->encoder->encode($file->getContent()):''
             ));
 
             $this->tracker->add($file);

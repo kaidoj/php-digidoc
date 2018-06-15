@@ -42,9 +42,20 @@ class File
     private $pathname;
 
     /**
-     * @param string|null $pathname
+     * @var string
      */
-    public function __construct($pathname = null)
+    private $digestType = 'sha256';
+
+    /**
+     * @var string
+     */
+    private $diggestValue = '';
+
+    /**
+     * @param string|null $pathname
+     * @param integer $id
+     */
+    public function __construct($pathname = null, $id = null)
     {
         $this->pathname = $pathname;
 
@@ -52,9 +63,10 @@ class File
             $file = new SfFile($pathname);
 
             $this->name = $file->getBasename();
-            $this->id = $this->name;
+            $this->id = $id?'D'. $id:$this->name;
             $this->mimeType = $file->getMimeType();
             $this->size = $file->getSize();
+            $this->digestValue = $this->getDigestTypeString();
         }
     }
 
@@ -107,6 +119,22 @@ class File
     }
 
     /**
+     * @return string
+     */
+    public function getDigestType()
+    {
+        return $this->digestType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDigestValue()
+    {
+        return $this->digestValue;
+    }
+
+    /**
      * @todo A duplicate of Encoder::getFileContent()
      *
      * @return string
@@ -137,5 +165,10 @@ class File
     public function getPathname()
     {
         return $this->pathname;
+    }
+
+    private function getDigestTypeString()
+    {
+        return base64_encode(hash('sha256', file_get_contents($this->getPathname()), true));
     }
 }

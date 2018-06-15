@@ -14,6 +14,8 @@ namespace KG\DigiDoc;
 use KG\DigiDoc\Exception\UnexpectedTypeException;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use KG\DigiDoc\Soap\Wsdl\DataFileInfo;
+use KG\DigiDoc\Soap\Wsdl\DataFileAttribute;
 
 class Envelope
 {
@@ -57,10 +59,11 @@ class Envelope
      * envelope has at least 1 signature.
      *
      * @param string|File $pathOrFile
+     * @param integer|null $id
      */
-    public function addFile($pathOrFile)
+    public function addFile($pathOrFile, $id = null)
     {
-        $file = is_string($pathOrFile) ? new File($pathOrFile) : $pathOrFile;
+        $file = is_string($pathOrFile) ? new File($pathOrFile, $id) : $pathOrFile;
 
         if (!($file instanceof File)) {
             throw new UnexpectedTypeException('string" or "\KG\DigiDoc\File', $file);
