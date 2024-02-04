@@ -17,7 +17,7 @@
         "symfony/http-foundation": "~7.0.3",
         "ext-zip": "*",
         "doctrine/collections": "~2.1",
-        "symfony/process": "~7.0.3",
+        "symfony/process": "v6.4.3",
         "phpseclib/phpseclib": "*"
     },
     "require-dev": {
