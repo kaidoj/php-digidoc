@@ -12,17 +12,17 @@
         }
     ],
     "require": {
-        "php": ">=5.3.8",
+        "php": ">=8.0",
         "ext-soap": "*",
-        "symfony/http-foundation": "~3.0",
+        "symfony/http-foundation": "~7.0.3",
         "ext-zip": "*",
-        "doctrine/collections": "~1.0",
-        "symfony/process": "~3.0",
+        "doctrine/collections": "~2.1",
+        "symfony/process": "~7.0.3",
         "phpseclib/phpseclib": "*"
     },
     "require-dev": {
-        "wsdl2phpgenerator/wsdl2phpgenerator": "~2.3",
-        "mikey179/vfsStream": "~1.4"
+        "wsdl2phpgenerator/wsdl2phpgenerator": "~3.4.0",
+        "mikey179/vfsStream": "~1.6"
     },
     "autoload": {
         "psr-4": { "KG\\DigiDoc\\": "src/" }
