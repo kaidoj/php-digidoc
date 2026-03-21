@@ -12,12 +12,12 @@
         }
     ],
     "require": {
-        "php": ">=5.3.8",
+        "php": ">=8.3",
         "ext-soap": "*",
-        "symfony/http-foundation": "~3.0",
+        "symfony/http-foundation": "~8.0.7",
         "ext-zip": "*",
         "doctrine/collections": "~1.0",
-        "symfony/process": "~3.0",
+        "symfony/process": "~v8.0.5",
         "phpseclib/phpseclib": "*"
     },
     "require-dev": {
